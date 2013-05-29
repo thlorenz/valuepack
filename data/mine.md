@@ -1,14 +1,13 @@
 # fields
 
-fields from the npm registry db that will be useful to store
+fields from the npm registry db and github that will be useful to store
 
-- indexes in bold
-- may not need in italic
-
+- fields to be indexed in **bold**
+- fields we may not need in *italic*
 
 ## npm users
 
-~8300
+count: ~8300
 
 ### Get all users
 
@@ -26,13 +25,13 @@ fields from the npm registry db that will be useful to store
   - twitter
   - fullname (may not need)
 
-Resolve gihub user name from npm user name, i.e. ping github with same name and if the account exists, assume that it is
-the right one. This will work in 99% of the cases.
-Later we can look thru user's repos and if one links github we can check against what we gussed
+In case no github info was given, try to resolve gihub user name from npm user name, i.e. ping github with same name and
+if the account exists, assume that it is the right one. This will work in 99% of the cases.
+Later we can look thru user's repos and if one links github we can check against what we guessed
   
 ## npm packages
 
-~30600
+count: ~30600
 
 ### Get all packages
 
@@ -41,7 +40,7 @@ Later we can look thru user's repos and if one links github we can check against
 ### Minimum
 
   - **name** (the key)
-  - maintainers (first one) name
+  - maintainers (first one) **name**
   - repository (type, url)
   - versions
   - *dist-tags*
@@ -60,7 +59,7 @@ Try to get one for each npm user
 
     curl -k https://api.github.com/users/<username>
 
-- *login* (username)
+- **login** (username)
 - `public_repos` (count)
 - followers (count)
 - following (count)
@@ -85,7 +84,7 @@ via `repos_url`
     curl -k https://api.github.com/users/<username>/repos
 
 - name
-- **fullname** (<user>/<reponame>)
+- **fullname** (`<user>/<reponame>`)
 - *description*
 - fork (true|false)
 - forks (count)
