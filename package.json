@@ -1,26 +1,29 @@
 {
-    "name" : "valuepack",
-    "version" : "0.0.0",
-    "description" : "Community driven rating system for nodejs modules on npm in order to help in selecting the right one. ",
-    "main" : "valuepack.js",
-    "scripts" : {
-        "test" : "tap test/*.js"
-    },
-    "repository" : {
-        "type" : "git",
-        "url" : "git://github.com/thlorenz/valuepack.git"
-    },
-    "homepage" : "https://github.com/thlorenz/valuepack",
-    "dependencies" : {
-    },
-    "devDependencies" : {
-    },
-    "keywords": [] ,
-    "author" : {
-        "name" : "Thorsten Lorenz",
-        "email" : "thlorenz@gmx.de",
-        "url" : "http://thlorenz.com"
-    },
-    "license" : "MIT",
-    "engine" : { "node" : ">=0.6" }
+  "name": "valuepack",
+  "version": "0.0.0",
+  "description": "Community driven rating system for nodejs modules on npm in order to help in selecting the right one. ",
+  "main": "valuepack.js",
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thlorenz/valuepack.git"
+  },
+  "homepage": "https://github.com/thlorenz/valuepack",
+  "dependencies": {
+    "level-sublevel": "~4.6.5",
+    "level": "~0.9.0"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": {
+    "name": "Thorsten Lorenz",
+    "email": "thlorenz@gmx.de",
+    "url": "http://thlorenz.com"
+  },
+  "license": "MIT",
+  "engine": {
+    "node": ">=0.6"
+  }
 }
