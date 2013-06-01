@@ -19,7 +19,16 @@ function retrieveOnly(db, cb) {
     , byOwner   =  db.sublevel(npm.byOwner, { valueEncoding: 'utf8' })
     , byKeyword =  db.sublevel(npm.byKeyword, { valueEncoding: 'utf8' });
 
-  dump.all(byOwner, function(err) { cb(err, db) })
+  var sub = packages
+    , what = 'all'
+    , argv = process.argv;
+
+  if (~argv.indexOf('--owner')) sub = byOwner
+  if (~argv.indexOf('--keyword')) sub = byKeyword
+  if (~argv.indexOf('--keys')) what = 'keys'
+  if (~argv.indexOf('--values')) what = 'values'
+
+  dump[what](sub, function(err) { cb(err, db) })
 }
 
 // TODO: request this file from couch every time

@@ -16,10 +16,17 @@ function retrieveOnly(db, cb) {
   db = sublevel(db);
 
   var users    =  db.sublevel(npm.users, { valueEncoding: 'json' })
-    , byLogin  =  db.sublevel(npm.byLogin, { valueEncoding: 'utf8' })
-    , byGithub =  db.sublevel(npm.byLogin, { valueEncoding: 'utf8' });
+    , byGithub =  db.sublevel(npm.byGithub, { valueEncoding: 'utf8' });
 
-  dump.keys(byGithub, function(err) { cb(err, db) })
+  var sub = users
+    , what = 'all'
+    , argv = process.argv;
+
+  if (~argv.indexOf('--github')) sub = byGithub
+  if (~argv.indexOf('--keys')) what = 'keys'
+  if (~argv.indexOf('--values')) what = 'values'
+
+  dump[what](sub, function(err) { cb(err, db) })
 }
 
 // TODO: request this file from couch fresh before storing it
