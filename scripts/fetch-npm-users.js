@@ -9,4 +9,5 @@ var path        =  require('path')
   , dataDir     =  process.env.VALUEPACK_DATA || path.join(__dirname, '..', 'data')
   , jsonPath    =  path.join(dataDir, 'npm-users.json')
 
+console.log('Storing fetched users data at: ', jsonPath);
 usersStream().pipe(fs.createWriteStream(jsonPath, { encoding: 'utf8' }))
