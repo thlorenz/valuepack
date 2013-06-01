@@ -9,11 +9,23 @@ Read more [about its goals](https://github.com/thlorenz/valuepack/blob/master/go
 
 You can play with scripts inside `./scripts`.
 
+### rebuild script
+
+In order to store all data in leveldb, please run:
+
+    ./rebuild-store.js
+
+**Note:** rebuilding the database from local json files takes about 2mins on a MacBookAir.
+
+### store scripts
+
 All `store-*` scripts take parameters. 
 
 - `--read` read out values of the store instead of adding them
 - `--keys` pull out and print keys only
 - `--values` pull out and print values only
+
+Therfore if you want to query data you should always pass the `--read` flag.
 
 #### store-npm-packages specific parameters
 
@@ -27,7 +39,10 @@ All `store-*` scripts take parameters.
 ### examples
 
     # get package keyword count
-    store-npm-packages.js --read --keyword --keys | wc -l
+    ./store-npm-packages.js --read --keyword --keys | wc -l
 
     # get package count
-    store-npm-packages.js --read --keys | wc -l
+    ./store-npm-packages.js --read --keys | wc -l
+
+    # get how may users did provide a github account
+    ./store-npm-users.js --read --github --keys | wc -l
