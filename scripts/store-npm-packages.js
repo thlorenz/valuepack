@@ -24,7 +24,7 @@ function retrieveOnly(db, cb) {
 
 // TODO: request this file from couch every time
 // https://registry.npmjs.org/-/all/
-function storeNpmPackages(db, cb) {
+var storeNpmPackages = module.exports = function (db, cb) {
   var json = fs.readFileSync(path.join(__dirname, '..', 'data', 'all.json'), 'utf8')
 
   db = sublevel(db);
@@ -34,6 +34,8 @@ function storeNpmPackages(db, cb) {
     cb(null, db)
   })
 }
+
+if (module.parent) return;
 
 if (!~process.argv.indexOf('--read'))
   leveldb.open(function (err, db) {

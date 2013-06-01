@@ -5,8 +5,8 @@
 
 var path       =  require('path')
   , fs         =  require('fs')
-  , leveldb    =  require('leveldb')
   , sublevel   =  require('level-sublevel')
+  , leveldb    =  require('../lib/leveldb')
   , dump       =  require('../lib/dump')
   , store      =  require('../lib/store-npm-users')
   , npm        =  require('../lib/namespaces').npm
@@ -24,7 +24,7 @@ function retrieveOnly(db, cb) {
 
 // TODO: request this file from couch fresh before storing it
 // https://registry.npmjs.org/-/users/
-function storeNpmUsers(db, cb) {
+var storeNpmUsers = module.exports = function (db, cb) {
   var json = fs.readFileSync(path.join(__dirname, '..', 'data', 'npm-users.json'), 'utf8')
 
   db = sublevel(db);
@@ -34,6 +34,8 @@ function storeNpmUsers(db, cb) {
     cb(null, db)
   })
 }
+
+if (module.parent) return;
 
 if (!~process.argv.indexOf('--read'))
   leveldb.open(function (err, db) {
