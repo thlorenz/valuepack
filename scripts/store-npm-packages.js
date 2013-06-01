@@ -10,6 +10,7 @@ var path       =  require('path')
   , dump       =  require('../lib/dump')
   , store      =  require('../lib/store-npm-packages')
   , npm        =  require('../lib/namespaces').npm
+  , existsSync =  fs.existsSync || path.existsSync
   ;
 
 function retrieveOnly(db, cb) {
@@ -31,10 +32,14 @@ function retrieveOnly(db, cb) {
   dump[what](sub, function(err) { cb(err, db) })
 }
 
-// TODO: request this file from couch every time
-// https://registry.npmjs.org/-/all/
 var storeNpmPackages = module.exports = function (db, cb) {
-  var json = fs.readFileSync(path.join(__dirname, '..', 'data', 'all.json'), 'utf8')
+  var dataDir = process.env.VALUEPACK_DATA || path.join(__dirname, '..', 'data')
+    , jsonPath = path.join(dataDir, 'npm-packages.json')
+
+  if (!existsSync(jsonPath)) 
+    return console.error('Cannot find %s. Please make sure to run fetch-npm-packages first', jsonPath);
+    
+  var json = fs.readFileSync(jsonPath, 'utf8')
 
   db = sublevel(db);
   store(db, json,  function (err, subs) {

@@ -9,6 +9,14 @@ Read more [about its goals](https://github.com/thlorenz/valuepack/blob/master/go
 
 You can play with scripts inside `./scripts`.
 
+### environment variables
+
+The following environment variables are considered by the scripts:
+
+- `VALUEPACK_DATA` the directory in which json data fetched from the npm registry is stored (defaults to
+  `valuepack-mine-npm/data`)
+- `VALUEPACK_DB` the path at which the leveldb data is stored (defaults to `valuepack-mine-npm/store/valuepack.db`)
+
 ### rebuild script
 
 In order to store all data in leveldb, please run:
